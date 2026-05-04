@@ -116,29 +116,29 @@ function App() {
 
   const menuData = {
     breakfast: [
-      { name: "Classic Omelette", desc: "Three farm eggs with choice of cheese and seasonal veggies.", price: "$12.50", image: "https://placehold.co/150x150/f5a623/white?text=🍳" },
-      { name: "Avocado Toast", desc: "Sourdough bread topped with mashed avocado, chili flakes, and poached eggs.", price: "$14.00", image: "https://placehold.co/150x150/4A7C59/white?text=🥑" },
-      { name: "French Toast", desc: "Brioche soaked in vanilla bean custard, served with maple syrup.", price: "$11.50", image: "https://placehold.co/150x150/8B4513/white?text=🍞" },
-      { name: "Breakfast Burrito", desc: "Scrambled eggs, black beans, avocado, and house-made salsa.", price: "$13.25", image: "https://placehold.co/150x150/c0392b/white?text=🌯" }
+      { name: "Classic Omelette", desc: "Three farm eggs with choice of cheese and seasonal veggies.", price: "$12.50", image: "https://images.unsplash.com/photo-1510693206972-df098062cb71?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "Avocado Toast", desc: "Sourdough bread topped with mashed avocado, chili flakes, and poached eggs.", price: "$14.00", image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "French Toast", desc: "Brioche soaked in vanilla bean custard, served with maple syrup.", price: "$11.50", image: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "Breakfast Burrito", desc: "Scrambled eggs, black beans, avocado, and house-made salsa.", price: "$13.25", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=400&h=400&q=80" }
     ],
     lunch: [
-      { name: "Grilled Panini", desc: "Fresh mozzarella, tomato, basil pesto on toasted ciabatta.", price: "$13.50", image: "https://placehold.co/150x150/4E2C0E/white?text=🥪" },
-      { name: "Caesar Salad", desc: "Romaine lettuce, parmesan, croutons, and house-made dressing.", price: "$11.00", image: "https://placehold.co/150x150/4A7C59/white?text=🥗" },
-      { name: "Tomato Soup", desc: "Creamy roasted tomato soup served with a side of sourdough.", price: "$9.50", image: "https://placehold.co/150x150/c0392b/white?text=🍲" },
-      { name: "Club Sandwich", desc: "Triple-layered classic with turkey, bacon, lettuce, and tomato.", price: "$12.00", image: "https://placehold.co/150x150/f5a623/white?text=🥙" }
+      { name: "Grilled Panini", desc: "Fresh mozzarella, tomato, basil pesto on toasted ciabatta.", price: "$13.50", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "Caesar Salad", desc: "Romaine lettuce, parmesan, croutons, and house-made dressing.", price: "$11.00", image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "Tomato Soup", desc: "Creamy roasted tomato soup served with a side of sourdough.", price: "$9.50", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "Club Sandwich", desc: "Triple-layered classic with turkey, bacon, lettuce, and tomato.", price: "$12.00", image: "https://images.unsplash.com/photo-1528736235302-52922df5c122?auto=format&fit=crop&w=400&h=400&q=80" }
     ],
     drinks: [
-      { name: "Signature Latte", desc: "Double shot espresso with steamed milk and a hint of vanilla.", price: "$5.50", image: "https://placehold.co/150x150/4E2C0E/white?text=☕" },
-      { name: "Iced Matcha", desc: "Premium grade matcha whisked with cold almond milk.", price: "$6.25", image: "https://placehold.co/150x150/4A7C59/white?text=🍵" },
-      { name: "Cheesecake", desc: "New York style cheesecake with a berry compote.", price: "$8.00", image: "https://placehold.co/150x150/FFF8F0/4E2C0E?text=🍰" },
-      { name: "Chocolate Brownie", desc: "Warm, fudgy brownie served with vanilla bean gelato.", price: "$6.50", image: "https://placehold.co/150x150/2b1707/white?text=🍫" }
+      { name: "Signature Latte", desc: "Double shot espresso with steamed milk and a hint of vanilla.", price: "$5.50", image: "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&w=800&q=80" },
+      { name: "Iced Matcha", desc: "Premium grade matcha whisked with cold almond milk.", price: "$6.25", image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "Cheesecake", desc: "New York style cheesecake with a berry compote.", price: "$8.00", image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&h=400&q=80" },
+      { name: "Chocolate Brownie", desc: "Warm, fudgy brownie served with vanilla bean gelato.", price: "$6.50", image: "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?auto=format&fit=crop&w=400&h=400&q=80" }
     ]
   };
 
   const renderHome = () => (
     <>
       {/* Hero Section */}
-      <header id="home" className="hero" style={{ backgroundImage: "url('/assets/hero.png')" }}>
+      <header id="home" className="hero" style={{ backgroundImage: "url('/background.png')" }}>
         <div className="hero-overlay"></div>
         <div className="container hero-content">
           <h2 className="fade-in">Welcome to The Cozy Cup Café</h2>
@@ -158,7 +158,7 @@ function App() {
           <div className="items-grid">
             <div className="item-card">
               <div className="card-img-container">
-                <img src="/assets/espresso.png" alt="Espresso" />
+                <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=400&h=400&q=80" alt="Espresso" />
               </div>
               <h3>Espresso</h3>
               <p>Rich, bold, and perfectly balanced. The heart of our coffee menu.</p>
@@ -167,7 +167,7 @@ function App() {
 
             <div className="item-card">
               <div className="card-img-container">
-                <img src="/assets/pancakes.png" alt="Pancakes" />
+                <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=400&h=400&q=80" alt="Pancakes" />
               </div>
               <h3>Pancakes</h3>
               <p>Fluffy buttermilk pancakes served with maple syrup and fresh berries.</p>
@@ -176,7 +176,7 @@ function App() {
 
             <div className="item-card">
               <div className="card-img-container">
-                <img src="/assets/croissant.png" alt="Croissant" />
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&h=400&q=80" alt="Croissant" />
               </div>
               <h3>Croissant</h3>
               <p>Buttery, flaky, and golden-brown. Baked fresh every morning.</p>

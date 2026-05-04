@@ -64,7 +64,7 @@ html {
 /* Hero Section */
 .hero {
   height: 100vh;
-  background-image: url('/hero.png'); /* Using generated image */
+  background-image: url('/background.png'); /* Using new background image */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -328,8 +328,11 @@ footer {
 
 /* Menu Page */
 .page-header {
-  padding: 10rem 0 5rem;
-  background-color: var(--color-brown);
+  padding: 12rem 0 6rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--color-white);
   text-align: center;
 }

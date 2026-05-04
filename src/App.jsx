@@ -15,6 +15,14 @@ function App() {
   const [isOwner, setIsOwner] = useState(false);
   const [allOrders, setAllOrders] = useState([]);
 
+  const OWNER_PHONE = "15551234567"; // Replace with your real phone number
+
+  const sendWhatsAppMessage = (message) => {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${OWNER_PHONE}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -79,47 +87,58 @@ function App() {
 
     try {
       await addDoc(collection(db, "orders"), order);
+      
+      // Send to WhatsApp
+      const itemsList = cart.map(item => `- ${item.name} (${item.price})`).join('\n');
+      const waMessage = `*New Order from The Cozy Cup Café*\n\n*Items:*\n${itemsList}\n\n*Total:* $${order.total}\n*Time:* ${order.timestamp}`;
+      sendWhatsAppMessage(waMessage);
+
       setCart([]);
       setIsCartOpen(false);
       alert(`Order Placed Successfully!`);
     } catch (error) {
-      console.error("Error adding order: ", error);
-      alert("Failed to place order. Please check your internet connection.");
+      console.error("Firebase Error Details:", error);
+      alert(`Firebase Error: ${error.message}\n\nCommon Fix: Please ensure Firestore is enabled and Security Rules are set to 'Test Mode' in your Firebase Console.`);
     }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
+    
+    // Send to WhatsApp
+    const message = `*New Inquiry from The Cozy Cup Café*\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Message:* ${formData.message}`;
+    sendWhatsAppMessage(message);
+
     setFormData({ name: '', email: '', message: '' });
     setTimeout(() => setFormSubmitted(false), 5000);
   };
 
   const menuData = {
     breakfast: [
-      { name: "Classic Omelette", desc: "Three farm eggs with choice of cheese and seasonal veggies.", price: "$12.50" },
-      { name: "Avocado Toast", desc: "Sourdough bread topped with mashed avocado, chili flakes, and poached eggs.", price: "$14.00" },
-      { name: "French Toast", desc: "Brioche soaked in vanilla bean custard, served with maple syrup.", price: "$11.50" },
-      { name: "Breakfast Burrito", desc: "Scrambled eggs, black beans, avocado, and house-made salsa.", price: "$13.25" }
+      { name: "Classic Omelette", desc: "Three farm eggs with choice of cheese and seasonal veggies.", price: "$12.50", image: "https://placehold.co/150x150/f5a623/white?text=🍳" },
+      { name: "Avocado Toast", desc: "Sourdough bread topped with mashed avocado, chili flakes, and poached eggs.", price: "$14.00", image: "https://placehold.co/150x150/4A7C59/white?text=🥑" },
+      { name: "French Toast", desc: "Brioche soaked in vanilla bean custard, served with maple syrup.", price: "$11.50", image: "https://placehold.co/150x150/8B4513/white?text=🍞" },
+      { name: "Breakfast Burrito", desc: "Scrambled eggs, black beans, avocado, and house-made salsa.", price: "$13.25", image: "https://placehold.co/150x150/c0392b/white?text=🌯" }
     ],
     lunch: [
-      { name: "Quinoa Salad", desc: "Organic quinoa, roasted chickpeas, kale, and lemon-tahini dressing.", price: "$15.00" },
-      { name: "Grilled Panini", desc: "Fresh mozzarella, tomato, basil pesto on toasted ciabatta.", price: "$13.50" },
-      { name: "Harvest Bowl", desc: "Roasted sweet potatoes, greens, wild rice, and maple vinaigrette.", price: "$16.00" },
-      { name: "Pesto Pasta", desc: "Penne tossed in house-made basil pesto with cherry tomatoes.", price: "$14.50" }
+      { name: "Grilled Panini", desc: "Fresh mozzarella, tomato, basil pesto on toasted ciabatta.", price: "$13.50", image: "https://placehold.co/150x150/4E2C0E/white?text=🥪" },
+      { name: "Caesar Salad", desc: "Romaine lettuce, parmesan, croutons, and house-made dressing.", price: "$11.00", image: "https://placehold.co/150x150/4A7C59/white?text=🥗" },
+      { name: "Tomato Soup", desc: "Creamy roasted tomato soup served with a side of sourdough.", price: "$9.50", image: "https://placehold.co/150x150/c0392b/white?text=🍲" },
+      { name: "Club Sandwich", desc: "Triple-layered classic with turkey, bacon, lettuce, and tomato.", price: "$12.00", image: "https://placehold.co/150x150/f5a623/white?text=🥙" }
     ],
     drinks: [
-      { name: "Signature Latte", desc: "Double shot espresso with steamed milk and a hint of vanilla.", price: "$5.50" },
-      { name: "Iced Matcha", desc: "Premium grade matcha whisked with cold almond milk.", price: "$6.25" },
-      { name: "Cheesecake", desc: "New York style cheesecake with a berry compote.", price: "$8.00" },
-      { name: "Chocolate Brownie", desc: "Warm, fudgy brownie served with vanilla bean gelato.", price: "$7.50" }
+      { name: "Signature Latte", desc: "Double shot espresso with steamed milk and a hint of vanilla.", price: "$5.50", image: "https://placehold.co/150x150/4E2C0E/white?text=☕" },
+      { name: "Iced Matcha", desc: "Premium grade matcha whisked with cold almond milk.", price: "$6.25", image: "https://placehold.co/150x150/4A7C59/white?text=🍵" },
+      { name: "Cheesecake", desc: "New York style cheesecake with a berry compote.", price: "$8.00", image: "https://placehold.co/150x150/FFF8F0/4E2C0E?text=🍰" },
+      { name: "Chocolate Brownie", desc: "Warm, fudgy brownie served with vanilla bean gelato.", price: "$6.50", image: "https://placehold.co/150x150/2b1707/white?text=🍫" }
     ]
   };
 
   const renderHome = () => (
     <>
       {/* Hero Section */}
-      <header id="home" className="hero">
+      <header id="home" className="hero" style={{ backgroundImage: "url('/assets/hero.png')" }}>
         <div className="hero-overlay"></div>
         <div className="container hero-content">
           <h2 className="fade-in">Welcome to The Cozy Cup Café</h2>
@@ -138,21 +157,27 @@ function App() {
           
           <div className="items-grid">
             <div className="item-card">
-              <div className="item-icon">☕</div>
+              <div className="card-img-container">
+                <img src="/assets/espresso.png" alt="Espresso" />
+              </div>
               <h3>Espresso</h3>
               <p>Rich, bold, and perfectly balanced. The heart of our coffee menu.</p>
               <span className="price">$3.50</span>
             </div>
 
             <div className="item-card">
-              <div className="item-icon">🥞</div>
+              <div className="card-img-container">
+                <img src="/assets/pancakes.png" alt="Pancakes" />
+              </div>
               <h3>Pancakes</h3>
               <p>Fluffy buttermilk pancakes served with maple syrup and fresh berries.</p>
               <span className="price">$8.95</span>
             </div>
 
             <div className="item-card">
-              <div className="item-icon">🥐</div>
+              <div className="card-img-container">
+                <img src="/assets/croissant.png" alt="Croissant" />
+              </div>
               <h3>Croissant</h3>
               <p>Buttery, flaky, and golden-brown. Baked fresh every morning.</p>
               <span className="price">$4.25</span>
@@ -203,6 +228,9 @@ function App() {
           <div className="menu-grid">
             {menuData[activeTab].map((item, index) => (
               <div key={index} className="menu-item-card fade-in">
+                <div className="card-img-container">
+                  <img src={item.image} alt={item.name} />
+                </div>
                 <div className="menu-item-info">
                   <h3>{item.name}</h3>
                   <p>{item.desc}</p>
@@ -232,7 +260,10 @@ function App() {
               ) : (
                 cart.map((item) => (
                   <div key={item.id} className="cart-item">
-                    <span>{item.name}</span>
+                    <div className="cart-item-left">
+                      <img src={item.image} alt={item.name} className="cart-thumb" />
+                      <span>{item.name}</span>
+                    </div>
                     <div className="cart-item-right">
                       <span>{item.price}</span>
                       <button onClick={() => removeFromCart(item.id)} className="remove-item">&times;</button>
@@ -368,7 +399,10 @@ function App() {
                     <div className="order-items">
                       {order.items.map((item, idx) => (
                         <div key={idx} className="order-item">
-                          <span>{item.name}</span>
+                          <div className="order-item-left">
+                            <img src={item.image} alt={item.name} className="order-thumb" />
+                            <span>{item.name}</span>
+                          </div>
                           <span>{item.price}</span>
                         </div>
                       ))}
